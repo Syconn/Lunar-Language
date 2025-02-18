@@ -1,0 +1,30 @@
+Overview:
+    Object Based language, requires type definition
+
+Comments:
+    #, //, /* */
+
+Operations:
+    '+' addition
+    '-' subtraction
+    '*' multiplication
+    '/' division
+    '//' integer division
+    '**' integer multiplication
+
+Primitivies:
+    "bool" = tr, fal
+    "int" = -1, 0, 1, ...
+    "real" = 1, ...
+    "str" = "text"
+
+Expressions:
+    
+
+Functionalities:
+    "for":
+        adsa
+
+Core Libraries:
+    "Math" = functions like floor, max, min, clamp, sin, cos
+    "Vectors" ?
