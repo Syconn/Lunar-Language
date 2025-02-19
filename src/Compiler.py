@@ -1,18 +1,28 @@
 # Compiles Code: C Based
+import Parser
+import os
 
-from Parser import *
+def find_files(path = os.path.curdir, ext = ".moon"):
+    lunarFiles = []
+    for subPath in os.scandir(path):
+        if (subPath.name.endswith(ext)):
+            lunarFiles.append(subPath.path)
+        elif (subPath.is_dir()):
+            files = find_files(path=subPath.path)
+            if (files): lunarFiles.append(files)
+    return lunarFiles
 
 def generate_code(ast):
-    c_code = "#include <stdio.h>\nint main() {\n"
+    code = "#include <stdio.h>\nint main() {\n"
     for stmt in ast:
-        if isinstance(stmt, Print):
+        if isinstance(stmt, Parser.Print):
             expr = stmt.expression
-            if isinstance(expr, BinaryOp):
-                c_code += f"    printf(\"%d\\n\", {expr.left.value} {expr.op} {expr.right.value});\n"
+            if isinstance(expr, Parser.BinaryOp):
+                code += f"    printf(\"%d\\n\", {expr.left.value} {expr.op} {expr.right.value});\n"
             else:
-                c_code += f"    printf(\"%d\\n\", {expr.value});\n"
-    c_code += "    return 0;\n}"
-    return c_code
+                code += f"    printf(\"%d\\n\", {expr.value});\n"
+    code += "    return 0;\n}"
+    return code
 
 
 def write_file(fileName, code):
