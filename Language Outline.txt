@@ -1,10 +1,13 @@
 Overview:
     Object Based language, requires type definition, MATH ORIENTATED LANGUAGE?
+    FileTypes:
+        .lunar, .lnr, .moon?
     Process:
         The Lexer and Parser will consist of a python based program that compiles code in C then create a executable through compiling
 
 Comments:
     #, //, /* */
+    Never Compilied into Source
 
 Operations:
     '+' addition
@@ -20,7 +23,7 @@ Operations:
     "not / !' not
 
 Control Flow:
-
+    'print' = outputs text
 
 Access Modifiers (Optional):
     "locked" = final/locked value
