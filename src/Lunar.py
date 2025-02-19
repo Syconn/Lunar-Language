@@ -1,11 +1,15 @@
 # Compiler
 from Lexer import tokenize_line
-from Compiler import generate_code
 from Parser import parse
+from Compiler import write_code
+from subprocess import call
 
-
-
-tokens = tokenize_line("print(5 + 8); // Hey Im a Comment")
+fileName = "basic_test.c"
+tokens = tokenize_line("print(5 + 20); // Hey Im a Comment")
 ast = parse(tokens)
-code = generate_code(ast)
-print(code)
+write_code(fileName, ast)
+
+# Generate and Executes Code
+call(["gcc", fileName, "-o", fileName[:-2]])
+call(["rm", fileName])
+# call("./a")
