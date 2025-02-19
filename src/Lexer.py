@@ -1,3 +1,4 @@
+# Lexer: Tokenizer
 import re
 
 # https://www.w3schools.com/python/python_regex.asp
@@ -17,7 +18,7 @@ TOKEN_REGEX = [
     (r'\s+', None),  # Ignore spaces
 ]
 
-def tokenizeLine(code):
+def tokenize_line(code):
     tokens = []
     while code:
         for pattern, token_type in TOKEN_REGEX:
@@ -33,5 +34,3 @@ def tokenizeLine(code):
         else:
             raise SyntaxError(f"Unexpected character: {code[0]}")
     return tokens
-
-print(tokenizeLine("print(5 + 8); // Hey Im a Comment"))

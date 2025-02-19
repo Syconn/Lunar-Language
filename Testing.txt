@@ -1,0 +1,3 @@
+After Creating c file
+    - To compile: gcc <FileName>.c -o output
+    - To run: ./<FileName>
