@@ -1,5 +1,7 @@
 Overview:
-    Object Based language, requires type definition
+    Object Based language, requires type definition, MATH ORIENTATED LANGUAGE?
+    Process:
+        The Lexer and Parser will consist of a python based program that compiles code in C then create a executable through compiling
 
 Comments:
     #, //, /* */
@@ -10,21 +12,40 @@ Operations:
     '*' multiplication
     '/' division
     '//' integer division
-    '**' integer multiplication
+    '**' exponential
+    'is / ==' is the same
+    'not is / !=' doesn't equal
+    'and / &' and
+    'or / |' or
+    "not / !' not
+
+Control Flow:
+
+
+Access Modifiers (Optional):
+    "locked" = final/locked value
+    "local" = protected value
+    "accessible" = public value
+    "global" static value
+    Defaults:
+        classes = "locked"
+        openfile = "accessible"
+         
 
 Primitivies:
     "bool" = tr, fal
     "int" = -1, 0, 1, ...
     "real" = 1, ...
+    "float" = 0.1, 0.2, ...
     "str" = "text"
 
 Expressions:
-    
+    "definition': <Access Modifier*> identiefier "operation"= identiefier; | null
+    "operation": identiefier "operation" identiefier; | value
+    "function": "keyword"();
 
-Functionalities:
-    "for":
-        adsa
+Error:
 
-Core Libraries:
+Core Libraries (MAYBE SOME PREDEFINED NO IMPORT?):
     "Math" = functions like floor, max, min, clamp, sin, cos
     "Vectors" ?
