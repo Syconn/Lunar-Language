@@ -1,15 +1,17 @@
 # Compiler
-from Lexer import tokenize_line
-from Parser import parse
-from Compiler import write_code
-from subprocess import call
+import Lexer
+import Parser
+import Compiler
+import subprocess
+import os
 
-fileName = "basic_test.c"
-tokens = tokenize_line("print(5 + 20); // Hey Im a Comment")
-ast = parse(tokens)
-write_code(fileName, ast)
+# Interprets Code
+fileName = "basic_test.c" # TODO Need to do Error Handling Somehow
+tokens = Lexer.tokenize_line("print(5 + 20); // Hey Im a Comment")
+ast = Parser.parse(tokens)
+Compiler.write_code(fileName, ast)
 
 # Generate and Executes Code
-call(["gcc", fileName, "-o", fileName[:-2]])
-call(["rm", fileName])
-# call("./a")
+subprocess.call(["gcc", fileName, "-o", fileName[:-2]])
+os.remove(fileName)
+subprocess.call("./" + fileName[:-2])
