@@ -23,7 +23,7 @@ class Print:
     def __str__(self):
         return f"Printing: {self.expression}"
 
-def parse_expression(tokens):
+def parse_operation(tokens):
     left = Number(tokens.pop(0)[1])  # First number
     while tokens and tokens[0][0] in ('PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE'):
         op = tokens.pop(0)[1]  # Operator
@@ -32,13 +32,16 @@ def parse_expression(tokens):
     return left
 
 def parse_statement(tokens):
+    print(tokens)
     if tokens[0][0] == 'PRINT':
         tokens.pop(0)  # Remove 'PRINT'
         tokens.pop(0)  # Remove '('
-        expr = parse_expression(tokens)
+        expr = parse_operation(tokens)
         tokens.pop(0)  # Remove ')'
         tokens.pop(0)  # Remove ';'
         return Print(expr)
+    elif tokens[0][0] == 'NUMBER':
+        return parse_operation(tokens)
 
 def parse(tokens):
     ast = []

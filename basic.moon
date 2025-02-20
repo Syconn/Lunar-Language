@@ -1,2 +1,2 @@
-print(5 + 2);
-print(2 + 2);
+int five = 5;
+print(five + 2);
