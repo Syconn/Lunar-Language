@@ -5,16 +5,15 @@ import Compiler
 import subprocess
 import os
 
-# Finds programming Files (Searches for files in src directory | main director)
-print(Compiler.find_files())
+# Interprets Code TODO Need to do Error Handling Somehow
+lunarFiles = Compiler.get_lunar()
+if lunarFiles:
+    file = Compiler.get_file_data(lunarFiles[1])
+    tokens = Lexer.tokenize_lines(lunarFiles[0])
+    ast = Parser.parse(tokens)
+    Compiler.write_code(file[1], ast)
 
-# # Interprets Code
-# fileName = "basic_test.c" # TODO Need to do Error Handling Somehow
-# tokens = Lexer.tokenize_line("print(5 + 20); // Hey Im a Comment")
-# ast = Parser.parse(tokens)
-# Compiler.write_code(fileName, ast)
-
-# # Generate and Executes Code
-# subprocess.call(["gcc", fileName, "-o", fileName[:-2]])
-# os.remove(fileName)
-# subprocess.call("./" + fileName[:-2])
+    # Generate and Executes Code
+    subprocess.call(["gcc", file[2], "-o", file[1]])
+    os.remove(file[2])
+    subprocess.call("./" + file[1])

@@ -4,18 +4,26 @@ class Number:
     def __init__(self, value):
         self.value = int(value)
 
+    def __str__(self):
+        return f"Number: {self.value}"
+
 class BinaryOp:
     def __init__(self, left, op, right):
         self.left = left
         self.op = op
         self.right = right
 
+    def __str__(self):
+        return f"Operation: {self.left} {self.op} {self.right}"
+    
 class Print:
     def __init__(self, expression):
         self.expression = expression
 
+    def __str__(self):
+        return f"Printing: {self.expression}"
+
 def parse_expression(tokens):
-    """Parses expressions like 5 + 3"""
     left = Number(tokens.pop(0)[1])  # First number
     while tokens and tokens[0][0] in ('PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE'):
         op = tokens.pop(0)[1]  # Operator
@@ -24,7 +32,6 @@ def parse_expression(tokens):
     return left
 
 def parse_statement(tokens):
-    """Parses statements like print(5 + 3);"""
     if tokens[0][0] == 'PRINT':
         tokens.pop(0)  # Remove 'PRINT'
         tokens.pop(0)  # Remove '('
@@ -35,6 +42,8 @@ def parse_statement(tokens):
 
 def parse(tokens):
     ast = []
-    while tokens:
-        ast.append(parse_statement(tokens))
+    while tokens: ast.append(parse_statement(tokens))
     return ast
+
+def test(tokens):
+    print("".join([str(x) + " | " for x in parse(tokens)]))

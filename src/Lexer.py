@@ -5,7 +5,6 @@ import re
 TOKEN_REGEX = [
     (r'\bprint\b', 'PRINT'),
     (r'[a-zA-Z_][a-zA-Z0-9_]*', 'IDENTIFIER'),
-    (r'//', 'COMMENT'),
     (r'\d+', 'NUMBER'),
     (r'\+', 'PLUS'),
     (r'-', 'MINUS'),
@@ -33,4 +32,10 @@ def tokenize_line(code):
                 break
         else:
             raise SyntaxError(f"Unexpected character: {code[0]}")
+    return tokens
+
+def tokenize_lines(lines):
+    tokens = []
+    for line in lines:
+        tokens += tokenize_line(line)
     return tokens
