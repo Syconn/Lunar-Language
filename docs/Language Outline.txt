@@ -25,7 +25,7 @@ Operations:
 Control Flow:
     'print' = outputs text
 
-Access Modifiers (Optional):
+Access Modifiers (Optional): TODO
     "locked" = final/locked value
     "local" = protected value
     "accessible" = public value
@@ -36,9 +36,8 @@ Access Modifiers (Optional):
          
 
 Primitivies:
-    "bool" = tr, fal
+    "bool" = true, false
     "int" = -1, 0, 1, ...
-    "real" = 1, ...
     "float" = 0.1, 0.2, ...
     "str" = "text"
 

@@ -1,2 +1,7 @@
-int five = 5;
-print(five + 2);
+main {
+    print("Hi name is " + getName());
+}
+
+#str getName() {
+#    out "Aidan Haack";
+#}

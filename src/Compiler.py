@@ -36,6 +36,8 @@ def generate_code(ast):
                 code += f"    printf(\"%d\\n\", {expr.left.value} {expr.op} {expr.right.value});\n"
             else:
                 code += f"    printf(\"%d\\n\", {expr.value});\n"
+        elif isinstance(stmt, Parser.AssignmentOp):
+            code += f"    {stmt.type} {stmt.var} = {stmt.value};\n"
     code += "    return 0;\n}"
     return code
 

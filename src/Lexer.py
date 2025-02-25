@@ -1,10 +1,18 @@
 # Lexer: Tokenizer
 import re
+import Error
 
-# https://www.w3schools.com/python/python_regex.asp
-TOKEN_REGEX = [
+TYPES = [
+    'BOOL', 
+    'INT',
+    'FLOAT',
+    'STRING'
+]
+
+TOKEN_REGEX = [ # https://www.w3schools.com/python/python_regex.asp
     # Functions
     (r'\bprint\b', 'PRINT'),
+    (r'\bmain\b', 'MAIN'),
 
     # Variables
     (r'\bbool\b', 'BOOL'),
@@ -12,7 +20,7 @@ TOKEN_REGEX = [
     (r'\bstr\b', 'STRING'),
 
     # Method Names, Variable Names, String Values
-    (r'[a-zA-Z_][a-zA-Z0-9_]*', 'IDENTIFIER'), 
+    (r'[a-zA-Z_][a-zA-Z0-9_]*', 'VARIABLE'), 
 
     # Operators
     (r'tr', 'TRUE'),
@@ -32,15 +40,18 @@ TOKEN_REGEX = [
     (r'\*', 'MULTIPLY'),
     (r'/', 'DIVIDE'),
     (r'=', 'EQUALS'),
+
+    # Body Controls
+    (r'\"', 'QUOTATION'),
     (r'\(', 'LPAREN'),
     (r'\)', 'RPAREN'),
     (r';', 'SEMICOLON'),
-
-     # Ignore spaces
-    (r'\s+', None)
+    (r'\{', 'LBRACE'),
+    (r'\}', 'RBRACE'),
+    (r'\s+', None)    
 ]
 
-def tokenize_line(code):
+def tokenize_line(code, line):
     tokens = []
     while code:
         for pattern, token_type in TOKEN_REGEX:
@@ -49,16 +60,20 @@ def tokenize_line(code):
                 if token_type == 'COMMENT':
                     code = ""
                     break
+                elif token_type == 'QUOTATION':
+                    code = code[1:]
+                    tokens.append(('STRING', code[:code.index('"')]))
+                    code = code[code.index('"'):]
                 elif token_type:
                     tokens.append((token_type, match.group(0)))
                 code = code[len(match.group(0)):]
                 break
         else:
-            raise SyntaxError(f"Unexpected character: {code[0]}")
+            Error.throw(Error.TypeError(line, code[0]))
     return tokens
 
 def tokenize_lines(lines):
     tokens = []
-    for line in lines:
-        tokens += tokenize_line(line)
+    for num, line in enumerate(lines):
+        tokens += tokenize_line(line, num)
     return tokens
