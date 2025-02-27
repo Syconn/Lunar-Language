@@ -28,9 +28,16 @@ def remove_comments(line):
     return line
 
 def generate_code(ast):
-    code = "#include <stdio.h>\nint main() {\n"
+    code = "#include <stdio.h>"
+    print(ast[0])
     for stmt in ast:
-        if isinstance(stmt, Parser.Print):
+        if isinstance(stmt, Parser.Function):
+            if stmt.id == "main":
+                code += "\nint main() {\n"
+            else:
+                code += f"\n{stmt.type} {stmt.id}()" + " {\n"
+            
+        elif isinstance(stmt, Parser.Print):
             expr = stmt.expression
             if isinstance(expr, Parser.BinaryOp):
                 code += f"    printf(\"%d\\n\", {expr.left.value} {expr.op} {expr.right.value});\n"
@@ -38,7 +45,6 @@ def generate_code(ast):
                 code += f"    printf(\"%d\\n\", {expr.value});\n"
         elif isinstance(stmt, Parser.AssignmentOp):
             code += f"    {stmt.type} {stmt.var} = {stmt.value};\n"
-    code += "    return 0;\n}"
     return code
 
 

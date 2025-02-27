@@ -20,6 +20,7 @@ TOKEN_REGEX = [ # https://www.w3schools.com/python/python_regex.asp
     (r'\bstr\b', 'STRING'),
 
     # Method Names, Variable Names, String Values
+    (r'[a-zA-Z_][a-zA-Z0-9_]*\(\)', 'CALL'), 
     (r'[a-zA-Z_][a-zA-Z0-9_]*', 'VARIABLE'), 
 
     # Operators

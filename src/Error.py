@@ -8,7 +8,7 @@ class SyntaxError(Error):
         self.output = output
 
     def message(self):
-        return f"Syntax Error, unknow value {self.unknown} in {self.output}"
+        return '\033[93m' + f"Syntax Error, unknow value {self.unknown} in {self.output}" + '\033[0m'
 
 class TypeError(Error):
     def __init__(self, line, symbol):
